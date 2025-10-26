@@ -10,6 +10,7 @@ By default it targets the 'dev' environment (use 'prod' argument to target produ
 """
 
 def setup_database(env='dev'):
+    day_limit = 31 if env == 'dev' else 24
     env_file = f'.env.{env}'
     
     if not os.path.exists(env_file):
@@ -20,7 +21,7 @@ def setup_database(env='dev'):
     
     db_url = os.getenv('DATABASE_URL')
     environment_name = 'Production' if env == 'prod' else 'Development'
-    print(f"🔧 Setup {environment_name} Database...")
+    print(f"🔧 Setup {environment_name} Database with {day_limit} days...")
     
     conn = psycopg2.connect(db_url)
     cur = conn.cursor()
@@ -37,10 +38,10 @@ def setup_database(env='dev'):
         # 2. Create new tables
         print("📦 Create new tables...")
         
-        cur.execute('''
+        cur.execute(f'''
             CREATE TABLE riddles (
                 id SERIAL PRIMARY KEY,
-                day_number INTEGER NOT NULL UNIQUE CHECK (day_number BETWEEN 1 AND 24),
+                day_number INTEGER NOT NULL UNIQUE CHECK (day_number BETWEEN 1 AND {day_limit}),
                 riddle_text TEXT NOT NULL
             );
         ''')
