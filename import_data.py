@@ -73,7 +73,7 @@ def import_advent_data(env='dev'):
                 INSERT INTO solutions (riddle_id, solution_content)
                 VALUES (%s, %s);
             ''', (riddle_id, riddle['solution_content']))
-            print(f"   ✅ Set solution\n")
+            print(f"   ✅ Set solution: {riddle['solution_content']}\n")
         
         conn.commit()
         print(f"🎉 All {env}-data successfully imported!")
