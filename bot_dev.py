@@ -177,6 +177,14 @@ async def handle_answer(update: Update, context: ContextTypes.DEFAULT_TYPE):
     day = context.user_data.get('current_day')
     
     user_answer = update.message.text
+
+    # If no riddle is active, send different message
+    if riddle_id is None:
+        await update.message.reply_text(
+            "🎁 Hmm... looks like Santa took the riddles for a test drive! 🛷💨\n\n"
+            "Try /riddle to get today’s challenge or /riddle1–/riddle24 to pick a past one!"
+        )
+        return
     
     # Check answer
     result = check_answer(riddle_id, user_answer)
