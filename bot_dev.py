@@ -80,28 +80,28 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 async def riddle(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Send riddle of the day"""
-    day = get_current_day()
-    print(f"day: " + str(day))
+    current_day = get_current_day()
+    print(f"day: " + str(current_day))
     
-    if day is None:
+    if current_day is None:
         await update.message.reply_text("🎅 The riddle advents calendar runs from December first until Christmas Eve!")
         return
     
-    riddle_data = get_riddle_for_day(day)
+    riddle_data = get_riddle_for_day(current_day)
     print(f"riddle_data: " + str(riddle_data))
     
     if riddle_data is None:
-        await update.message.reply_text(f"❌ There is no riddle for the {day}. day.")
+        await update.message.reply_text(f"❌ There is no riddle for the {current_day}. day.")
         return
     
     riddle_id, riddle_text = riddle_data
     
     # Save current riddle in user data
     context.user_data['current_riddle_id'] = riddle_id
-    context.user_data['current_day'] = day
+    context.user_data['current_day'] = current_day
     
     await update.message.reply_text(
-        f"🎁 **Riddle day {day}:**\n\n{riddle_text}",
+        f"🎁 **Riddle day {current_day}:**\n\n{riddle_text}",
         parse_mode='Markdown'
     )
 
@@ -119,6 +119,15 @@ async def riddle_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return
     
     print(f"Requested riddle for day: {day}")
+    
+    current_day = get_current_day()
+    if current_day is None:
+        await update.message.reply_text("❌ 🎅 The riddle advents calendar runs from December first until Christmas Eve!")
+        return
+
+    if day > current_day:
+        await update.message.reply_text("❌ You can't access future riddles!")
+        return
 
     if not 1 <= day <= 24:
         await update.message.reply_text("❌ Day has to be between 1 - 24!")
