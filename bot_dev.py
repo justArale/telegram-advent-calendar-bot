@@ -129,7 +129,7 @@ async def riddle_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("❌ You can't access future riddles!")
         return
 
-    if not 1 <= day <= 24:
+    if not 1 <= day <= 31:
         await update.message.reply_text("❌ Day has to be between 1 - 24!")
         return
     
@@ -192,7 +192,12 @@ async def handle_answer(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if result:
         # If right answer
         await update.message.reply_text(f"🎉 **Right!** Day {day}")
-        await update.message.reply_text("You can open: " + result[0])
+        # And day is not the 24th
+        if day != 24:
+            await update.message.reply_text("You can open: " + result[0])
+        # Day is the 24th
+        if day == 24:
+            await update.message.reply_text(result[0])
         
         # Delete current riddle from user data
         context.user_data['current_riddle_id'] = None
