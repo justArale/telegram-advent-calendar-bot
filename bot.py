@@ -7,7 +7,8 @@ import logging
 from zoneinfo import ZoneInfo
 from datetime import datetime, time
 
-load_dotenv()
+# Get PRODUCTION Environment
+load_dotenv('.env.prod', override=True)
 
 # Setup logging
 logging.basicConfig(
