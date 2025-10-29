@@ -84,7 +84,7 @@ async def riddle(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print(f"day: " + str(current_day))
     
     if current_day is None:
-        await update.message.reply_text("🎅 The riddle advents calendar runs from December first until Christmas Eve!")
+        await update.message.reply_text("🎄✨ The riddle advents calendar runs from December first until Christmas Eve!")
         return
     
     riddle_data = get_riddle_for_day(current_day)
@@ -121,17 +121,22 @@ async def riddle_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print(f"Requested riddle for day: {day}")
     
     current_day = get_current_day()
+    
     if current_day is None:
-        await update.message.reply_text("❌ 🎅 The riddle advents calendar runs from December first until Christmas Eve!")
+        await update.message.reply_text("🎅 Ho ho... not so fast, clever coder! 🎄\n\n"
+        "The Advent Calendar only runs from *December 1st to Christmas Eve!* 🎁")
         return
 
     if day > current_day:
-        await update.message.reply_text("❌ You can't access future riddles!")
+        await update.message.reply_text("❌ Whoa there, time traveler! ❄️\n\n"
+        "You can’t peek at *future riddles* — Santa hasn’t wrapped them yet! 🎁")
         return
 
     if not 1 <= day <= 31:
-        await update.message.reply_text("❌ Day has to be between 1 - 24!")
+        await update.message.reply_text("❌ Oops! That day doesn’t exist in Santa’s schedule!\n\n"
+        "Please choose a day *between 1 and 24!* 🎁")
         return
+    
     
     riddle_data = get_riddle_for_day(day)
     print(f"day: " + str(riddle_data))
@@ -207,7 +212,7 @@ async def handle_answer(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 def main():
-    """Start bot"""
+    """Start DEV bot"""
     BOT_TOKEN = os.getenv('BOT_TOKEN')
     
     if not BOT_TOKEN:
