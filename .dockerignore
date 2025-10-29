@@ -1,0 +1,12 @@
+.env*
+__pycache__
+*.pyc
+.git
+.gitignore
+README.md
+.vscode
+*.json
+setup_dev.py
+import_data.py
+bot_dev.py
+LICENSE
