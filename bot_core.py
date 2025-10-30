@@ -63,7 +63,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE, is_dev=False
         )
     else:
         text = (
-            "🎄 *Advent Riddle Bot v1.0* 🎄✨\n\n"
+            "🎄 *Advent Riddle Bot* 🎄✨\n\n"
             "Daily riddles await — some plain text, some in code.\n"
             "Solve them, claim your emoji loot. 🎁\n\n"
             "Commands:\n"
