@@ -55,6 +55,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE, is_dev=False
         text = (
             "🧪 **DEV advent calendar-Bot**\n\n"
             "Commands:\n"
+            "/start - Show this message\n"
             "/riddle - Riddle of the day\n"
             "/riddle1 - /riddle24 - Display riddle for day X\n"
             "/list - Display all available riddle\n\n"
@@ -66,6 +67,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE, is_dev=False
             "Daily riddles await — some plain text, some in code.\n"
             "Solve them, claim your emoji loot. 🎁\n\n"
             "Commands:\n"
+            "/start - Show this message\n"
             "/riddle - Today's challenge\n"
             "/riddle{1-24} - Pick an specific past riddle\n\n"
         )
