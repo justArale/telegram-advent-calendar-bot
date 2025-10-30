@@ -5,11 +5,8 @@ services:
     build: .
     container_name: advent-calendar-bot
     restart: unless-stopped
-    environment:
-      - BOT_TOKEN=${BOT_TOKEN}
-      - DATABASE_URL=${DATABASE_URL}
-      - TIMEZONE=${TIMEZONE}
-      - ENVIRONMENT=${ENVIRONMENT}
+    env_file:
+      - .env.prod
     volumes:
       - ./logs:/app/logs
     networks:
