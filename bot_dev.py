@@ -15,13 +15,13 @@ TIMEZONE = ZoneInfo(os.getenv('TIMEZONE'))
 print(f"Using TIMEZONE: {TIMEZONE}")
 
 MONTH = int(os.getenv('MONTH'))
-END_DAY = int(os.getenv('ENDDAY'))
+LAST_DAY = int(os.getenv('LAST_DAY'))
 
 def get_current_day():
     """Returns the current day (1-24)"""
     now = datetime.now(TIMEZONE)
     # Take month and end day from .env.dev
-    if now.month == MONTH and 1 <= now.day <= END_DAY:
+    if now.month == MONTH and 1 <= now.day <= LAST_DAY:
         return now.day
     return None
 
@@ -73,7 +73,7 @@ def main():
     application.add_handler(CommandHandler("list", list_command))
     
     # Dynamic handler for /riddle{day}
-    for day in range(1, END_DAY + 1):
+    for day in range(1, LAST_DAY + 1):
         application.add_handler(CommandHandler(f"riddle{day}", riddle_day))
     
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_riddle_answer))

@@ -102,7 +102,7 @@ telegram-advent-calendar-bot/
    TIMEZONE=preferred_timezone
    ENVIRONMENT=development
    MONTH=current_month
-   ENDDAY=31
+   LAST_DAY=31
 ```
 
 4. **Setup database**
@@ -135,7 +135,7 @@ telegram-advent-calendar-bot/
    TIMEZONE=preferred_timezone
    ENVIRONMENT=prod
    MONTH=12
-   ENDDAY=24
+   LAST_DAY=24
 ```
 
 3. **Create your production riddles**
